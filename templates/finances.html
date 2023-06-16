@@ -1,0 +1,57 @@
+{% include 'layout.html' %}
+
+<div class="container12">
+  <div class="content-left">
+
+    <h1>Aster Finances</h1>
+
+    <h2></h2>
+    <form action="/finances/all" method="get" class="show-me-form">
+      <input type="submit" value="Display All Entries" class="show-me-button">
+    </form>
+
+    <h2></h2>
+    <form action="/finances/group" method="get" class="show-me-form">
+      <input type="submit" value="Display Group Finances" class="show-me-button">
+    </form>
+
+    <h2></h2>
+    <form action="/finances/{{ name }}" method="post">
+      <input type="submit" value="Display Personal Finances" class="show-me-button">
+      <label for="name">Enter Name:</label>
+      <input type="text" name="name" id="name" required>
+    </form>
+
+    <h2></h2>
+    <form action="/finances/balance_sheet" method="get" class="show-me-form">
+      <input type="submit" value="Display Balance Sheet" class="show-me-button">
+    </form>
+
+  </div>
+
+    
+
+  <div class="content-right">
+    <h2>Result:</h2>
+    {% if person_name %}
+      <p>Name: {{ person_name }}</p>
+      <p><b>Total Spent: {{ p_total_spent }}</b></p>
+      <p><b>Total Owed: {{ p_owed }}</b></p>
+      <p><b>Balance: {{ p_balance }}</b></p>
+      <p> </p>
+      <p>--Other Stats--</p>
+      <p>Largest Purchase: {{ p_largest_purchase }}</p>
+      <p>Smallest Purchase: {{ p_smallest_purchase }}</p>
+      <p>Most Spent Type: {{ p_most_spent_type }}</p>
+      <p>Least Spent Type: {{ p_least_spent_type }}</p>
+    {% elif topTable %}
+      <h3>Top 3 Paid Groups:</h3>
+      {{ topTable|safe }}
+      <h3>Bottom 3 Paid Groups:</h3>
+      {{ bottomTable|safe }}
+    {% elif html_table %}
+        {{ html_table|safe }}
+    {% endif %}
+  </div>
+</div>
+
