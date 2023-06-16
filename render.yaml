@@ -1,0 +1,4 @@
+# render.yaml
+env:
+  - name: PYTHON_VERSION
+    value: "3.9"
