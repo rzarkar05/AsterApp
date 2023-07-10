@@ -1,4 +1,5 @@
 from database import Base
+from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
 
 #Inheirits base which allows it to be a table
@@ -12,6 +13,7 @@ class Users(Base):
     hashed_pass = Column(String)
     is_active = Column(Boolean, default=True)
     role = Column(String)
+    todos = relationship("Todos", back_populates="owner")
 
 #Inheirits base which allows it to be a table
 class Todos(Base):
@@ -21,3 +23,4 @@ class Todos(Base):
     description = Column(String)
     complete = Column(Boolean, default=False)
     owner_id = Column(Integer, ForeignKey("users.id"))
+    owner = relationship("Users", back_populates="todos")
